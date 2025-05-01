@@ -1,0 +1,14 @@
+bash /opt/jmeter/bin/jmeter -n -t "/home/vendor/load_test/load_write.jmx" -Jthreads=100 -Jramp=5 -Jduration=300 -l "/home/vendor/load_test/result-1.jtl"
+
+
+bash /opt/jmeter/bin/jmeter -n -t "/home/vendor/load_test/load_write.jmx" -Jthreads=100 -Jramp=0 -Jduration=1 -l "/home/vendor/load_test/result-2.jtl"
+
+
+ -Jthreads=100 -Jduration=300 
+
+
+systemctl stop confluent-server
+
+
+systemctl start confluent-server
+systemctl restart confluent-kafka-connect

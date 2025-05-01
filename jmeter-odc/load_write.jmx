@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="API Load Test">
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="THREADS" elementType="Argument">
+            <stringProp name="Argument.name">THREADS</stringProp>
+            <stringProp name="Argument.value">${__P(threads,1)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="RAMP_TIME" elementType="Argument">
+            <stringProp name="Argument.name">RAMP_TIME</stringProp>
+            <stringProp name="Argument.value">${__P(ramp,1)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="DURATION" elementType="Argument">
+            <stringProp name="Argument.name">DURATION</stringProp>
+            <stringProp name="Argument.value">${__P(duration,60)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Local">
+        <stringProp name="ThreadGroup.num_threads">${THREADS}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${RAMP_TIME}</stringProp>
+        <stringProp name="ThreadGroup.duration">${DURATION}</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">false</boolProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <intProp name="LoopController.loops">-1</intProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request">
+          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.port">8080</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.path">/api/odc</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;tieredData&quot;: {&#xd;
+      &quot;fields&quot;: {&#xd;
+        &quot;REF_UUID&quot;: {&#xd;
+          &quot;name&quot;: &quot;REF_UUID&quot;,&#xd;
+          &quot;value&quot;: &quot;&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;FORMAT&quot;: {&#xd;
+          &quot;name&quot;: &quot;FORMAT&quot;,&#xd;
+          &quot;value&quot;: &quot;0&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;0&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;NETWORK_STATUS&quot;: {&#xd;
+          &quot;name&quot;: &quot;NETWORK_STATUS&quot;,&#xd;
+          &quot;value&quot;: &quot;2&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;2&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;CASH_OUT&quot;: {&#xd;
+          &quot;name&quot;: &quot;CASH_OUT&quot;,&#xd;
+          &quot;value&quot;: &quot;020000000003&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;020000000003&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;RRN&quot;: {&#xd;
+          &quot;name&quot;: &quot;RRN&quot;,&#xd;
+          &quot;value&quot;: &quot;000000000269&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OR&quot;: &quot;000269      &quot;,&#xd;
+            &quot;IR&quot;: &quot;000000000269&quot;,&#xd;
+            &quot;IN&quot;: &quot;000000000269&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PAN_PREFIX&quot;: {&#xd;
+          &quot;name&quot;: &quot;PAN_PREFIX&quot;,&#xd;
+          &quot;value&quot;: &quot;622200&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;622200&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ACQ_NETWORK&quot;: {&#xd;
+          &quot;name&quot;: &quot;ACQ_NETWORK&quot;,&#xd;
+          &quot;value&quot;: &quot;EFTS&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;EFTS&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PARTACQ&quot;: {&#xd;
+          &quot;name&quot;: &quot;PARTACQ&quot;,&#xd;
+          &quot;value&quot;: &quot;1703&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;1703&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;AMOUNT&quot;: {&#xd;
+          &quot;name&quot;: &quot;AMOUNT&quot;,&#xd;
+          &quot;value&quot;: &quot;1585000000&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;1585000000&quot;,&#xd;
+            &quot;IN&quot;: &quot;1585000000&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;CREATOR&quot;: {&#xd;
+          &quot;name&quot;: &quot;CREATOR&quot;,&#xd;
+          &quot;value&quot;: &quot;REN_ONLINE&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;REN_ONLINE&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;IIIC&quot;: {&#xd;
+          &quot;name&quot;: &quot;IIIC&quot;,&#xd;
+          &quot;value&quot;: &quot;10000000200&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;10000000200&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;LOC_OWNER&quot;: {&#xd;
+          &quot;name&quot;: &quot;LOC_OWNER&quot;,&#xd;
+          &quot;value&quot;: &quot;RC1 Jl. Perintis No.1,&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;RC1 Jl. Perintis No.1,&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PARTISS&quot;: {&#xd;
+          &quot;name&quot;: &quot;PARTISS&quot;,&#xd;
+          &quot;value&quot;: &quot;989&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;989&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;SENDING_TIME_TO_NTWK_UTC&quot;: {&#xd;
+          &quot;name&quot;: &quot;SENDING_TIME_TO_NTWK_UTC&quot;,&#xd;
+          &quot;value&quot;: &quot;20230531T040628.554&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;20230531T040628.554&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MID&quot;: {&#xd;
+          &quot;name&quot;: &quot;MID&quot;,&#xd;
+          &quot;value&quot;: &quot;               &quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;               &quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DTSETTLE&quot;: {&#xd;
+          &quot;name&quot;: &quot;DTSETTLE&quot;,&#xd;
+          &quot;value&quot;: &quot;&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PANENTRY&quot;: {&#xd;
+          &quot;name&quot;: &quot;PANENTRY&quot;,&#xd;
+          &quot;value&quot;: &quot;90&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;90&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PRINCIPALS_CODE&quot;: {&#xd;
+          &quot;name&quot;: &quot;PRINCIPALS_CODE&quot;,&#xd;
+          &quot;value&quot;: &quot;360004&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;360004&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;BIN_ISSUEING_COUNTRY&quot;: {&#xd;
+          &quot;name&quot;: &quot;BIN_ISSUEING_COUNTRY&quot;,&#xd;
+          &quot;value&quot;: &quot;360&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;360&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;RC&quot;: {&#xd;
+          &quot;name&quot;: &quot;RC&quot;,&#xd;
+          &quot;value&quot;: &quot;00&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;0&quot;,&#xd;
+            &quot;IR&quot;: &quot;00&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ISS_SETTLEMENT_DATE&quot;: {&#xd;
+          &quot;name&quot;: &quot;ISS_SETTLEMENT_DATE&quot;,&#xd;
+          &quot;value&quot;: &quot;2023-05-31&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;2023-05-31&quot;,&#xd;
+            &quot;IN&quot;: &quot;2023-05-31&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;JCO&quot;: {&#xd;
+          &quot;name&quot;: &quot;JCO&quot;,&#xd;
+          &quot;value&quot;: &quot;002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PCI_DATA_SOURCE&quot;: {&#xd;
+          &quot;name&quot;: &quot;PCI_DATA_SOURCE&quot;,&#xd;
+          &quot;value&quot;: &quot;JALIN_CONTAINER&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;JALIN_CONTAINER&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;SOURCE&quot;: {&#xd;
+          &quot;name&quot;: &quot;SOURCE&quot;,&#xd;
+          &quot;value&quot;: &quot;1&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;1&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;BIN_CARD_ISSUED_REGION&quot;: {&#xd;
+          &quot;name&quot;: &quot;BIN_CARD_ISSUED_REGION&quot;,&#xd;
+          &quot;value&quot;: &quot;B&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;B&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;FEE_PROGRAMM&quot;: {&#xd;
+          &quot;name&quot;: &quot;FEE_PROGRAMM&quot;,&#xd;
+          &quot;value&quot;: &quot;0&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;0&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DE90&quot;: {&#xd;
+          &quot;name&quot;: &quot;DE90&quot;,&#xd;
+          &quot;value&quot;: &quot;&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TCP_DESIRED_STATE&quot;: {&#xd;
+          &quot;name&quot;: &quot;TCP_DESIRED_STATE&quot;,&#xd;
+          &quot;value&quot;: &quot;3&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;3&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TCP_CURRENT_STATE&quot;: {&#xd;
+          &quot;name&quot;: &quot;TCP_CURRENT_STATE&quot;,&#xd;
+          &quot;value&quot;: &quot;3&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;3&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;IS2&quot;: {&#xd;
+          &quot;name&quot;: &quot;IS2&quot;,&#xd;
+          &quot;value&quot;: &quot;OU&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;OU&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;HEADER&quot;: {&#xd;
+          &quot;name&quot;: &quot;HEADER&quot;,&#xd;
+          &quot;value&quot;: &quot;&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ISS_NETWORK&quot;: {&#xd;
+          &quot;name&quot;: &quot;ISS_NETWORK&quot;,&#xd;
+          &quot;value&quot;: &quot;JALIN&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;JALIN&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;IS_POS_TNX&quot;: {&#xd;
+          &quot;name&quot;: &quot;IS_POS_TNX&quot;,&#xd;
+          &quot;value&quot;: &quot;0&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;0&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;SYSTEM_ID&quot;: {&#xd;
+          &quot;name&quot;: &quot;SYSTEM_ID&quot;,&#xd;
+          &quot;value&quot;: &quot;41471&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;41471&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TRANS_STATUS&quot;: {&#xd;
+          &quot;name&quot;: &quot;TRANS_STATUS&quot;,&#xd;
+          &quot;value&quot;: &quot;1&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;1&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DENOM&quot;: {&#xd;
+          &quot;name&quot;: &quot;DENOM&quot;,&#xd;
+          &quot;value&quot;: &quot;50000 &quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;50000 &quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;AIIC&quot;: {&#xd;
+          &quot;name&quot;: &quot;AIIC&quot;,&#xd;
+          &quot;value&quot;: &quot;99000000200&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;99000000200&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PIN_EXISTS&quot;: {&#xd;
+          &quot;name&quot;: &quot;PIN_EXISTS&quot;,&#xd;
+          &quot;value&quot;: &quot;1&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;1&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;POSENTRY&quot;: {&#xd;
+          &quot;name&quot;: &quot;POSENTRY&quot;,&#xd;
+          &quot;value&quot;: &quot;21&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;21&quot;,&#xd;
+            &quot;IN&quot;: &quot;901&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TRANSTIME_ISO_UTC&quot;: {&#xd;
+          &quot;name&quot;: &quot;TRANSTIME_ISO_UTC&quot;,&#xd;
+          &quot;value&quot;: &quot;20230531T040628.460&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;20230531T040628.460&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;SOURCE_ID&quot;: {&#xd;
+          &quot;name&quot;: &quot;SOURCE_ID&quot;,&#xd;
+          &quot;value&quot;: &quot;17164&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;17164&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ACQ_SETTLEMENT_DATE&quot;: {&#xd;
+          &quot;name&quot;: &quot;ACQ_SETTLEMENT_DATE&quot;,&#xd;
+          &quot;value&quot;: &quot;2023-06-01&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;2023-06-01&quot;,&#xd;
+            &quot;IN&quot;: &quot;2023-06-01&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;STAN&quot;: {&#xd;
+          &quot;name&quot;: &quot;STAN&quot;,&#xd;
+          &quot;value&quot;: &quot;556165&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;556165&quot;,&#xd;
+            &quot;IN&quot;: &quot;269&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;SERVICECODE&quot;: {&#xd;
+          &quot;name&quot;: &quot;SERVICECODE&quot;,&#xd;
+          &quot;value&quot;: &quot;126&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;126&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MCC&quot;: {&#xd;
+          &quot;name&quot;: &quot;MCC&quot;,&#xd;
+          &quot;value&quot;: &quot;6011&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;6011&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MCAT&quot;: {&#xd;
+          &quot;name&quot;: &quot;MCAT&quot;,&#xd;
+          &quot;value&quot;: &quot;6011&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;6011&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TID&quot;: {&#xd;
+          &quot;name&quot;: &quot;TID&quot;,&#xd;
+          &quot;value&quot;: &quot;T2004310&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;T2004310&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PROD&quot;: {&#xd;
+          &quot;name&quot;: &quot;PROD&quot;,&#xd;
+          &quot;value&quot;: &quot;ATM&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;ATM&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ACCOUNT_FROM&quot;: {&#xd;
+          &quot;name&quot;: &quot;ACCOUNT_FROM&quot;,&#xd;
+          &quot;value&quot;: &quot;40&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;40&quot;,&#xd;
+            &quot;IN&quot;: &quot;0&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;LOC_STATE&quot;: {&#xd;
+          &quot;name&quot;: &quot;LOC_STATE&quot;,&#xd;
+          &quot;value&quot;: &quot;36&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;36&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ACQ_PARTICIPANT&quot;: {&#xd;
+          &quot;name&quot;: &quot;ACQ_PARTICIPANT&quot;,&#xd;
+          &quot;value&quot;: &quot;1703&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;1703&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;BIN_CARD_BILLING_CURRENCY&quot;: {&#xd;
+          &quot;name&quot;: &quot;BIN_CARD_BILLING_CURRENCY&quot;,&#xd;
+          &quot;value&quot;: &quot;360&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;360&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PAN&quot;: {&#xd;
+          &quot;name&quot;: &quot;PAN&quot;,&#xd;
+          &quot;value&quot;: &quot;@0002dsq+2zWIQMMVZCG9Vd8c8je6ETaB02d4lxtxxfMUaW8=&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;@0002dsq+2zWIQMMVZCG9Vd8c8je6ETaB02d4lxtxxfMUaW8=&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PCI_DATA_KEY&quot;: {&#xd;
+          &quot;name&quot;: &quot;PCI_DATA_KEY&quot;,&#xd;
+          &quot;value&quot;: &quot;84982598-ff68-11ed-8423-506b8dfe06ed&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;84982598-ff68-11ed-8423-506b8dfe06ed&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TERMENTRYCAPS&quot;: {&#xd;
+          &quot;name&quot;: &quot;TERMENTRYCAPS&quot;,&#xd;
+          &quot;value&quot;: &quot;5&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;5&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;SWITCH_SETTLEMENT_DATE&quot;: {&#xd;
+          &quot;name&quot;: &quot;SWITCH_SETTLEMENT_DATE&quot;,&#xd;
+          &quot;value&quot;: &quot;2023-05-31&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;2023-05-31&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;EXPIRY&quot;: {&#xd;
+          &quot;name&quot;: &quot;EXPIRY&quot;,&#xd;
+          &quot;value&quot;: &quot;2603&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;2603&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TRANSTIME&quot;: {&#xd;
+          &quot;name&quot;: &quot;TRANSTIME&quot;,&#xd;
+          &quot;value&quot;: &quot;0531110640&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OR&quot;: &quot;0531110640&quot;,&#xd;
+            &quot;IN&quot;: &quot;0531110640&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DT&quot;: {&#xd;
+          &quot;name&quot;: &quot;DT&quot;,&#xd;
+          &quot;value&quot;: &quot;2023-05-31 11:06:27&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;2023-05-31 11:06:27&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;LANGUAGE_CODE&quot;: {&#xd;
+          &quot;name&quot;: &quot;LANGUAGE_CODE&quot;,&#xd;
+          &quot;value&quot;: &quot;ID&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;ID&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;COUNTRY&quot;: {&#xd;
+          &quot;name&quot;: &quot;COUNTRY&quot;,&#xd;
+          &quot;value&quot;: &quot;&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MA&quot;: {&#xd;
+          &quot;name&quot;: &quot;MA&quot;,&#xd;
+          &quot;value&quot;: &quot;1&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;1&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MC&quot;: {&#xd;
+          &quot;name&quot;: &quot;MC&quot;,&#xd;
+          &quot;value&quot;: &quot;2&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;2&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ACQCNTRYCODE&quot;: {&#xd;
+          &quot;name&quot;: &quot;ACQCNTRYCODE&quot;,&#xd;
+          &quot;value&quot;: &quot;&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;BILLER_PARTID&quot;: {&#xd;
+          &quot;name&quot;: &quot;BILLER_PARTID&quot;,&#xd;
+          &quot;value&quot;: &quot;1703&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;1703&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;UUID&quot;: {&#xd;
+          &quot;name&quot;: &quot;UUID&quot;,&#xd;
+          &quot;value&quot;: &quot;84982598-ff68-11ed-8423-506b8dfe06ed&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;84982598-ff68-11ed-8423-506b8dfe06ed&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TERMINAL_INDICATOR&quot;: {&#xd;
+          &quot;name&quot;: &quot;TERMINAL_INDICATOR&quot;,&#xd;
+          &quot;value&quot;: &quot;0&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;0&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MERCHANT_LOCATION&quot;: {&#xd;
+          &quot;name&quot;: &quot;MERCHANT_LOCATION&quot;,&#xd;
+          &quot;value&quot;: &quot;RC1 Jl. Perintis No.1, Tangerang    36ID&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;RC1 Jl. Perintis No.1, Tangerang    36ID&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;RECEIVE_TIME_FROM_NTWKK_UTC&quot;: {&#xd;
+          &quot;name&quot;: &quot;RECEIVE_TIME_FROM_NTWKK_UTC&quot;,&#xd;
+          &quot;value&quot;: &quot;20230531T040628.836&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;20230531T040628.836&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;BIN_TYPE&quot;: {&#xd;
+          &quot;name&quot;: &quot;BIN_TYPE&quot;,&#xd;
+          &quot;value&quot;: &quot;1&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;1&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;NETWORK&quot;: {&#xd;
+          &quot;name&quot;: &quot;NETWORK&quot;,&#xd;
+          &quot;value&quot;: &quot;JALIN&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;JALIN&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;SUB_PRODUCT&quot;: {&#xd;
+          &quot;name&quot;: &quot;SUB_PRODUCT&quot;,&#xd;
+          &quot;value&quot;: &quot;ATMC&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;ATMC&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MT&quot;: {&#xd;
+          &quot;name&quot;: &quot;MT&quot;,&#xd;
+          &quot;value&quot;: &quot;152&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;152&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MSG_THROUGHPUT_TIME_MS&quot;: {&#xd;
+          &quot;name&quot;: &quot;MSG_THROUGHPUT_TIME_MS&quot;,&#xd;
+          &quot;value&quot;: &quot;458&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;458&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DATE&quot;: {&#xd;
+          &quot;name&quot;: &quot;DATE&quot;,&#xd;
+          &quot;value&quot;: &quot;0531&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OR&quot;: &quot;0531&quot;,&#xd;
+            &quot;IN&quot;: &quot;0531&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;FINAL_RC&quot;: {&#xd;
+          &quot;name&quot;: &quot;FINAL_RC&quot;,&#xd;
+          &quot;value&quot;: &quot;0&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;0&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MASK_PAN&quot;: {&#xd;
+          &quot;name&quot;: &quot;MASK_PAN&quot;,&#xd;
+          &quot;value&quot;: &quot;622200XXXXXX1746&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;622200XXXXXX1746&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ACCOUNT_TYPE_DE3&quot;: {&#xd;
+          &quot;name&quot;: &quot;ACCOUNT_TYPE_DE3&quot;,&#xd;
+          &quot;value&quot;: &quot;00&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;00&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;LOC_COUNTRY&quot;: {&#xd;
+          &quot;name&quot;: &quot;LOC_COUNTRY&quot;,&#xd;
+          &quot;value&quot;: &quot;360&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;360&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;LOC_CITY&quot;: {&#xd;
+          &quot;name&quot;: &quot;LOC_CITY&quot;,&#xd;
+          &quot;value&quot;: &quot;Tangerang&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;Tangerang&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;RESP_PROCESSING_TIME_MS&quot;: {&#xd;
+          &quot;name&quot;: &quot;RESP_PROCESSING_TIME_MS&quot;,&#xd;
+          &quot;value&quot;: &quot;82&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;82&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;CARD_READER_TYPE&quot;: {&#xd;
+          &quot;name&quot;: &quot;CARD_READER_TYPE&quot;,&#xd;
+          &quot;value&quot;: &quot;1&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;1&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DE124&quot;: {&#xd;
+          &quot;name&quot;: &quot;DE124&quot;,&#xd;
+          &quot;value&quot;: &quot;ATD00225&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OR&quot;: &quot;ATD00225&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TRANS_ID&quot;: {&#xd;
+          &quot;name&quot;: &quot;TRANS_ID&quot;,&#xd;
+          &quot;value&quot;: &quot;17164&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;17164&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DE123&quot;: {&#xd;
+          &quot;name&quot;: &quot;DE123&quot;,&#xd;
+          &quot;value&quot;: &quot;&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OR&quot;: &quot;&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ISS_PARTICIPANT&quot;: {&#xd;
+          &quot;name&quot;: &quot;ISS_PARTICIPANT&quot;,&#xd;
+          &quot;value&quot;: &quot;989&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;989&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DE120&quot;: {&#xd;
+          &quot;name&quot;: &quot;DE120&quot;,&#xd;
+          &quot;value&quot;: &quot;001002COJCO085002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310TIF003100LCD002ID&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OR&quot;: &quot;001002COJCO085002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310TIF003100LCD002ID&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DE48&quot;: {&#xd;
+          &quot;name&quot;: &quot;DE48&quot;,&#xd;
+          &quot;value&quot;: &quot;002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310&quot;,&#xd;
+            &quot;IR&quot;: &quot;002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DE43&quot;: {&#xd;
+          &quot;name&quot;: &quot;DE43&quot;,&#xd;
+          &quot;value&quot;: &quot;RC1 Jl. Perintis No.1,Tangerang    036ID&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;RC1 Jl. Perintis No.1,Tangerang    036ID&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;CURRENCY&quot;: {&#xd;
+          &quot;name&quot;: &quot;CURRENCY&quot;,&#xd;
+          &quot;value&quot;: &quot;360&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;360&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;BACKOFFICE_EXCLUSION_FLAG&quot;: {&#xd;
+          &quot;name&quot;: &quot;BACKOFFICE_EXCLUSION_FLAG&quot;,&#xd;
+          &quot;value&quot;: &quot;N&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;N&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TERMTYPE&quot;: {&#xd;
+          &quot;name&quot;: &quot;TERMTYPE&quot;,&#xd;
+          &quot;value&quot;: &quot;2&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;2&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ACCOUNT_TO&quot;: {&#xd;
+          &quot;name&quot;: &quot;ACCOUNT_TO&quot;,&#xd;
+          &quot;value&quot;: &quot;0&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;0&quot;,&#xd;
+            &quot;IN&quot;: &quot;0&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;DIRECTION&quot;: {&#xd;
+          &quot;name&quot;: &quot;DIRECTION&quot;,&#xd;
+          &quot;value&quot;: &quot;OUT&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;OUT&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;MSGTYPE&quot;: {&#xd;
+          &quot;name&quot;: &quot;MSGTYPE&quot;,&#xd;
+          &quot;value&quot;: &quot;0200&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OR&quot;: &quot;0200&quot;,&#xd;
+            &quot;IN&quot;: &quot;0200&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TRANS_RESULT&quot;: {&#xd;
+          &quot;name&quot;: &quot;TRANS_RESULT&quot;,&#xd;
+          &quot;value&quot;: &quot;0&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;0&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TIME&quot;: {&#xd;
+          &quot;name&quot;: &quot;TIME&quot;,&#xd;
+          &quot;value&quot;: &quot;110627&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OR&quot;: &quot;110627&quot;,&#xd;
+            &quot;IN&quot;: &quot;110627&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;REQ_PROCESSING_TIME_MS&quot;: {&#xd;
+          &quot;name&quot;: &quot;REQ_PROCESSING_TIME_MS&quot;,&#xd;
+          &quot;value&quot;: &quot;94&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;94&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PINENTRY&quot;: {&#xd;
+          &quot;name&quot;: &quot;PINENTRY&quot;,&#xd;
+          &quot;value&quot;: &quot;1&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;1&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;REFF_NUM&quot;: {&#xd;
+          &quot;name&quot;: &quot;REFF_NUM&quot;,&#xd;
+          &quot;value&quot;: &quot;                  4093550302151T2004310&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;                  4093550302151T2004310&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TIME_TAKEN_BY_REN_MS&quot;: {&#xd;
+          &quot;name&quot;: &quot;TIME_TAKEN_BY_REN_MS&quot;,&#xd;
+          &quot;value&quot;: &quot;83&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IR&quot;: &quot;83&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ACQ_ISS&quot;: {&#xd;
+          &quot;name&quot;: &quot;ACQ_ISS&quot;,&#xd;
+          &quot;value&quot;: &quot;ACQ&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;DEF&quot;: &quot;ACQ&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;ORD_DATE&quot;: {&#xd;
+          &quot;name&quot;: &quot;ORD_DATE&quot;,&#xd;
+          &quot;value&quot;: &quot;005233&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;005233&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;GATEWAY_ID&quot;: {&#xd;
+          &quot;name&quot;: &quot;GATEWAY_ID&quot;,&#xd;
+          &quot;value&quot;: &quot;100&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;100&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TRANSTIME_UTC&quot;: {&#xd;
+          &quot;name&quot;: &quot;TRANSTIME_UTC&quot;,&#xd;
+          &quot;value&quot;: &quot;2023-05-31 04:06:28&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;2023-05-31 04:06:28&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;PROCCODE&quot;: {&#xd;
+          &quot;name&quot;: &quot;PROCCODE&quot;,&#xd;
+          &quot;value&quot;: &quot;254000&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;254000&quot;,&#xd;
+            &quot;OR&quot;: &quot;900000&quot;,&#xd;
+            &quot;IR&quot;: &quot;254000&quot;,&#xd;
+            &quot;IN&quot;: &quot;900000&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;CONDCODE&quot;: {&#xd;
+          &quot;name&quot;: &quot;CONDCODE&quot;,&#xd;
+          &quot;value&quot;: &quot;0&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;IN&quot;: &quot;0&quot;&#xd;
+          }&#xd;
+        },&#xd;
+        &quot;TOTAL_LEGS&quot;: {&#xd;
+          &quot;name&quot;: &quot;TOTAL_LEGS&quot;,&#xd;
+          &quot;value&quot;: &quot;1&quot;,&#xd;
+          &quot;tiers&quot;: {&#xd;
+            &quot;OT&quot;: &quot;1&quot;&#xd;
+          }&#xd;
+        }&#xd;
+      }&#xd;
+    },&#xd;
+    &quot;endpointData&quot;: {&#xd;
+      &quot;ACQ_NETWORK_IN&quot;: {&#xd;
+        &quot;name&quot;: &quot;EndpointData_EFTS_REQ_IN&quot;,&#xd;
+        &quot;MSG_DIRECTION&quot;: &quot;IN&quot;,&#xd;
+        &quot;REQ_RESP&quot;: &quot;REQ&quot;,&#xd;
+        &quot;NETWORK_TYPE&quot;: &quot;EFTS&quot;,&#xd;
+        &quot;DE-007&quot;: &quot;0531110640&quot;,&#xd;
+        &quot;DE-018&quot;: &quot;6011&quot;,&#xd;
+        &quot;DE-049&quot;: &quot;360&quot;,&#xd;
+        &quot;DE-004&quot;: &quot;001585000000&quot;,&#xd;
+        &quot;DE-037&quot;: &quot;000269      &quot;,&#xd;
+        &quot;DE-032&quot;: &quot;99000000200&quot;,&#xd;
+        &quot;DE-043&quot;: &quot;RC1 Jl. Perintis No.1, Tangerang    36ID&quot;,&#xd;
+        &quot;DE-120&quot;: &quot;001002COJCO085002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310TIF003100LCD002ID&quot;,&#xd;
+        &quot;DE-042&quot;: &quot;               &quot;,&#xd;
+        &quot;DE-041&quot;: &quot;T2004310&quot;,&#xd;
+        &quot;DE-052&quot;: &quot;XXX with length: 16&quot;,&#xd;
+        &quot;DE-003&quot;: &quot;900000&quot;,&#xd;
+        &quot;DE-025&quot;: &quot;00&quot;,&#xd;
+        &quot;DE-124&quot;: &quot;ATD00225&quot;,&#xd;
+        &quot;DE-013&quot;: &quot;0531&quot;,&#xd;
+        &quot;DE-001&quot;: &quot;0000000000000110&quot;,&#xd;
+        &quot;DE-012&quot;: &quot;110627&quot;,&#xd;
+        &quot;DE-000&quot;: &quot;0200&quot;,&#xd;
+        &quot;DE-011&quot;: &quot;000269&quot;,&#xd;
+        &quot;DE-022&quot;: &quot;901&quot;&#xd;
+      },&#xd;
+      &quot;ACQ_NETWORK_OUT&quot;: {&#xd;
+        &quot;name&quot;: &quot;EndpointData_EFTS_RESP_OUT&quot;,&#xd;
+        &quot;MSG_DIRECTION&quot;: &quot;OUT&quot;,&#xd;
+        &quot;REQ_RESP&quot;: &quot;RESP&quot;,&#xd;
+        &quot;NETWORK_TYPE&quot;: &quot;EFTS&quot;,&#xd;
+        &quot;DE-007&quot;: &quot;0531110640&quot;,&#xd;
+        &quot;DE-039&quot;: &quot;00&quot;,&#xd;
+        &quot;DE-049&quot;: &quot;360&quot;,&#xd;
+        &quot;DE-004&quot;: &quot;001585000000&quot;,&#xd;
+        &quot;DE-015&quot;: &quot;0601&quot;,&#xd;
+        &quot;DE-037&quot;: &quot;000269      &quot;,&#xd;
+        &quot;DE-032&quot;: &quot;99000000200&quot;,&#xd;
+        &quot;DE-120&quot;: &quot;001002COJCO085002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310TIF003100LCD002IDIS2002OU&quot;,&#xd;
+        &quot;DE-041&quot;: &quot;T2004310&quot;,&#xd;
+        &quot;DE-003&quot;: &quot;900000&quot;,&#xd;
+        &quot;DE-013&quot;: &quot;0531&quot;,&#xd;
+        &quot;DE-001&quot;: &quot;0000000000000100&quot;,&#xd;
+        &quot;DE-012&quot;: &quot;110627&quot;,&#xd;
+        &quot;DE-000&quot;: &quot;0210&quot;,&#xd;
+        &quot;DE-011&quot;: &quot;000269&quot;&#xd;
+      },&#xd;
+      &quot;ISS_NETWORK_IN&quot;: {&#xd;
+        &quot;name&quot;: &quot;EndpointData_JALIN_RESP_IN&quot;,&#xd;
+        &quot;MSG_DIRECTION&quot;: &quot;IN&quot;,&#xd;
+        &quot;REQ_RESP&quot;: &quot;RESP&quot;,&#xd;
+        &quot;NETWORK_TYPE&quot;: &quot;JALIN&quot;,&#xd;
+        &quot;DE-007&quot;: &quot;0531040628&quot;,&#xd;
+        &quot;DE-017&quot;: &quot;0531&quot;,&#xd;
+        &quot;DE-039&quot;: &quot;00&quot;,&#xd;
+        &quot;DE-049&quot;: &quot;360&quot;,&#xd;
+        &quot;DE-004&quot;: &quot;001585000000&quot;,&#xd;
+        &quot;DE-037&quot;: &quot;000000000269&quot;,&#xd;
+        &quot;DE-048&quot;: &quot;002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310&quot;,&#xd;
+        &quot;DE-032&quot;: &quot;99000000200&quot;,&#xd;
+        &quot;DE-043&quot;: &quot;RC1 Jl. Perintis No.1,Tangerang    036ID&quot;,&#xd;
+        &quot;DE-041&quot;: &quot;T2004310        &quot;,&#xd;
+        &quot;DE-052&quot;: &quot;XXX with length: 16&quot;,&#xd;
+        &quot;DE-003&quot;: &quot;254000&quot;,&#xd;
+        &quot;DE-013&quot;: &quot;0531&quot;,&#xd;
+        &quot;DE-012&quot;: &quot;110627&quot;,&#xd;
+        &quot;DE-000&quot;: &quot;0210&quot;,&#xd;
+        &quot;DE-011&quot;: &quot;556165&quot;,&#xd;
+        &quot;DE-022&quot;: &quot;021&quot;,&#xd;
+        &quot;DE-060&quot;: &quot;BTN 1234+420&quot;&#xd;
+      },&#xd;
+      &quot;ISS_NETWORK_OUT&quot;: {&#xd;
+        &quot;name&quot;: &quot;EndpointData_JALIN_REQ_OUT&quot;,&#xd;
+        &quot;MSG_DIRECTION&quot;: &quot;OUT&quot;,&#xd;
+        &quot;REQ_RESP&quot;: &quot;REQ&quot;,&#xd;
+        &quot;NETWORK_TYPE&quot;: &quot;JALIN&quot;,&#xd;
+        &quot;DE-007&quot;: &quot;0531040628&quot;,&#xd;
+        &quot;DE-017&quot;: &quot;0531&quot;,&#xd;
+        &quot;DE-049&quot;: &quot;360&quot;,&#xd;
+        &quot;DE-004&quot;: &quot;001585000000&quot;,&#xd;
+        &quot;DE-037&quot;: &quot;000000000269&quot;,&#xd;
+        &quot;DE-048&quot;: &quot;002000000000300523310523050000     UG_BINTARO                   4093550302151T2004310&quot;,&#xd;
+        &quot;DE-032&quot;: &quot;99000000200&quot;,&#xd;
+        &quot;DE-043&quot;: &quot;RC1 Jl. Perintis No.1,Tangerang    036ID&quot;,&#xd;
+        &quot;DE-041&quot;: &quot;T2004310        &quot;,&#xd;
+        &quot;DE-052&quot;: &quot;XXX with length: 16&quot;,&#xd;
+        &quot;DE-003&quot;: &quot;254000&quot;,&#xd;
+        &quot;DE-013&quot;: &quot;0531&quot;,&#xd;
+        &quot;DE-012&quot;: &quot;110627&quot;,&#xd;
+        &quot;DE-000&quot;: &quot;0200&quot;,&#xd;
+        &quot;DE-011&quot;: &quot;556165&quot;,&#xd;
+        &quot;DE-022&quot;: &quot;021&quot;,&#xd;
+        &quot;DE-060&quot;: &quot;BTN 1234+420&quot;&#xd;
+      }&#xd;
+    }&#xd;
+  }&#xd;
+  </stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.implementation">Java</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

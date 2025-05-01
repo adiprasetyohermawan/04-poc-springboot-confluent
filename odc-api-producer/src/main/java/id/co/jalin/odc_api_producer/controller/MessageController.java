@@ -1,126 +1,125 @@
 package id.co.jalin.odc_api_producer.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import id.co.jalin.odc_api_producer.dto.OutputRecord;
-import lombok.RequiredArgsConstructor;
+import org.apache.avro.Schema;
+import org.apache.avro.generic.GenericData;
+import org.apache.avro.generic.GenericRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
-
 import org.springframework.kafka.support.SendResult;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicLong;
-
+import java.util.zip.GZIPOutputStream;
 
 @RestController
-// public class MessageController {
-//     @GetMapping("/ping")
-//     public String ping() {
-//         return "pong";
-//     }
-// }
-
 @RequestMapping("/api")
-@RequiredArgsConstructor
-public class MessageController
- {
+public class MessageController {
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
-    private static final AtomicLong COUNTER = new AtomicLong(0);
+    @Autowired
+    private KafkaTemplate<String, GenericRecord> kafkaTemplate;
+
     private static final String DEV_API_TOPIC = "dev_api";
+    private static final AtomicLong COUNTER = new AtomicLong(0);
+    private static final DateTimeFormatter RECEIVED_FMT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private static final DateTimeFormatter RECEIVED_FMT =DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
 
+    private static final String SCHEMA_STRING = """
+        {
+          "type": "record",
+          "name": "KafkaPayload",
+          "namespace": "com.jalin.api_odc.avro",
+          "fields": [
+            {"name": "system_id", "type": "long"},
+            {"name": "reference_system_id", "type": ["null", "string"], "default": null},
+            {"name": "source", "type": ["null", "string"], "default": null},
+            {"name": "source_id", "type": ["null", "string"], "default": null},
+            {"name": "source_date", "type": ["null", "string"], "default": null},
+            {"name": "received_datetime", "type": ["null", "string"], "default": null},
+            {"name": "data_key", "type": ["null", "string"], "default": null},
+            {"name": "reference_data_key", "type": ["null", "string"], "default": null},
+            {"name": "data_identifier", "type": ["null", "string"], "default": null},
+            {"name": "raw_data", "type": ["null", "string"], "default": null},
+            {"name": "reason_unprocessed", "type": ["null", "string"], "default": null}
+          ]
+        }
+        """;
 
-
-    @PostMapping("/messages")
-    public String postNestedJson(@RequestBody String payload) {
-        kafkaTemplate.send(DEV_API_TOPIC, payload);
-
-         // 1. Encode the raw JSON string to Base64
-        String encoded = Base64.getEncoder().encodeToString(payload.getBytes(StandardCharsets.UTF_8));
-
-        // 2. Send the Base64 payload to Kafka
-        kafkaTemplate.send(DEV_API_TOPIC, encoded);
-
-        return "Successfully sent nested JSON to topic: " + DEV_API_TOPIC;
-
-    }   
-
-@PostMapping("/send")
-    // public String sendMessage(@RequestParam String topic, @RequestParam String message) {
-    public ResponseEntity<OutputRecord> sendMessage( @RequestBody String payload) throws Exception {
+    @PostMapping("/odc")
+    public ResponseEntity<String> sendMessage(@RequestBody String payload) throws Exception {
         JsonNode root = objectMapper.readTree(payload);
-        
-        // 1) Generate or extract each field
+
         long systemId = COUNTER.incrementAndGet();
-        String source            = root.path("source").asText("");
-        String sourceId          = root.path("source_id").asText("");
-        String dataKey           = root.path("tieredData")
-                                       .path("fields")
-                                       .path("UUID")
-                                       .path("value")
-                                       .asText("");
-        String refDataKey        = root.path("tieredData")
-                                       .path("fields")
-                                       .path("REFERENCE_NUMBER")
-                                       .path("value")
-                                       .asText("");
-        String dataIdentifier    = root.path("tieredData")
-                                       .path("fields")
-                                       .path("MC")
-                                       .path("value")
-                                       .asText("");
-        String rawDataB64        = Base64.getEncoder().encodeToString(payload.getBytes(StandardCharsets.UTF_8));
-        String receivedDate      = LocalDateTime.now().format(RECEIVED_FMT);
+        String source = root.path("source").asText(null);
+        String sourceId = root.path("source_id").asText(null);
+        String dataKey = root.path("tieredData").path("fields").path("UUID").path("value").asText(null);
+        String refDataKey = root.path("tieredData").path("fields").path("REFERENCE_NUMBER").path("value").asText(null);
+        String dataIdentifier = root.path("tieredData").path("fields").path("MC").path("value").asText(null);
+        String rawDataB64 = encodeGzipBase64(payload);
+        String receivedDate = LocalDateTime.now().format(RECEIVED_FMT);
 
-        // 2) Build the record
-        OutputRecord rec = new OutputRecord();
-        rec.setSystemId(systemId);
-        rec.setReferenceSystemId("");
-        rec.setSource(source);
-        rec.setSourceId(sourceId);
-        rec.setSourceDate("");
-        rec.setReceivedDate(receivedDate);
-        rec.setDataKey(dataKey);
-        rec.setReferenceDataKey(refDataKey);
-        rec.setDataIdentifier(dataIdentifier);
-        rec.setRawData(rawDataB64);
-        rec.setReasonUnprocessed("");
+        // Build Avro schema and GenericRecord
+        Schema schema = new Schema.Parser().parse(SCHEMA_STRING);
+        GenericRecord record = new GenericData.Record(schema);
 
+        record.put("system_id", systemId);
+        record.put("reference_system_id", null);
+        record.put("source", source);
+        record.put("source_id", sourceId);
+        record.put("source_date", null);
+        record.put("received_datetime", receivedDate);
+        record.put("data_key", dataKey);
+        record.put("reference_data_key", refDataKey);
+        record.put("data_identifier", dataIdentifier);
+        record.put("raw_data", rawDataB64);
+        record.put("reason_unprocessed", null);
 
-        
+        // Send using Kafka
+        CompletableFuture<SendResult<String, GenericRecord>> future = kafkaTemplate.send(DEV_API_TOPIC, record);
 
-
-        // 3) Serialize & send to Kafka
-        String jsonOut = objectMapper.writeValueAsString(rec);
-        // kafkaTemplate.send(DEV_API_TOPIC, jsonOut);
-
-        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(DEV_API_TOPIC, jsonOut);
         future.whenComplete((result, ex) -> {
             if (ex != null) {
-                System.err.println("Error sending message: " + ex.getMessage());
+                System.err.println("Failed to send message: " + ex.getMessage());
             } else {
-                System.out.println("Message sent successfully: " + result.getProducerRecord().value());
+                System.out.println("Message sent: " + result.getRecordMetadata().offset());
             }
         });
 
-
-        // 4) Return the same record to the caller    
-        return ResponseEntity.ok(rec);
+        return ResponseEntity.ok("Message sent to Kafka topic: " + DEV_API_TOPIC);
     }
 
-        
+    private String encodeGzipBase64(String json) {
+        try {
+            // 1. Minify JSON string using Jackson
+            JsonNode tree = objectMapper.readTree(json);
+            String compactJson = objectMapper.writeValueAsString(tree);
 
+            // 2. Compress using GZIP
+            ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+            try (GZIPOutputStream gzipStream = new GZIPOutputStream(byteStream)) {
+                gzipStream.write(compactJson.getBytes(StandardCharsets.UTF_8));
+            }
 
-//     }
+            // 3. Encode to URL-safe Base64 **without padding**
+            String base64 = Base64.getUrlEncoder()
+                                .withoutPadding()
+                                .encodeToString(byteStream.toByteArray());
+
+            // 4. Prefix with "GZ"
+            return "GZ" + base64;
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to compress and encode payload", e);
+        }
+    }
+    
 }
-
