@@ -1,0 +1,624 @@
+{
+    "tieredData": {
+        "fields": {
+            "RC": {
+                "name": "RC",
+                "value": "",
+                "tiers": {
+                    "OT": "9050",
+                    "IR": ""
+                }
+            },
+            "TRANS_RESULT": {
+                "name": "TRANS_RESULT",
+                "value": "00",
+                "tiers": {
+                    "DEF": "00"
+                }
+            },
+            "SUB_PRODUCT": {
+                "name": "SUB_PRODUCT",
+                "value": "",
+                "tiers": {
+                    "IR": ""
+                }
+            },
+            "REF_UUID": {
+                "name": "REF_UUID",
+                "tiers": {
+                    "DEF": ""
+                }
+            },
+            "DT": {
+                "name": "DT",
+                "value": "{{rendate}} 11:30:45",
+                "tiers": {
+                    "IN": "{{rendate}} 11:30:45"
+                }
+            },
+            "TRANSTIME_UTC": {
+                "name": "TRANSTIME_UTC",
+                "value": "{{rendate}} 11:30:45",
+                "tiers": {
+                    "IN": "{{rendate}} 11:30:45"
+                }
+            },
+            "TRANSTIME_ISO_UTC": {
+                "name": "TRANSTIME_ISO_UTC",
+                "value": "{{rendatetimeISO}}",
+                "tiers": {
+                    "IN": "{{rendatetimeISO}}"
+                }
+            },
+            "SWITCH_SETTLEMENT_DATE": {
+                "name": "SWITCH_SETTLEMENT_DATE",
+                "value": "{{rendate}}",
+                "tiers": {
+                    "OT": "{{rendate}}"
+                }
+            },
+            "ISS_SETTLEMENT_DATE": {
+                "name": "ISS_SETTLEMENT_DATE",
+                "value": "{{rendate}}",
+                "tiers": {
+                    "OT": "{{rendate}}"
+                }
+            },
+            "ACQ_SETTLEMENT_DATE": {
+                "name": "ACQ_SETTLEMENT_DATE",
+                "value": "{{rendate}}",
+                "tiers": {
+                    "OT": "{{rendate}}"
+                }
+            },
+            "SETTLEMENT_DATE": {
+                "name": "SETTLEMENT_DATE",
+                "value": "0512",
+                "tiers": {
+                    "IN": "0512"
+                }
+            },
+            "ACQ_ISS": {
+                "name": "ACQ_ISS",
+                "value": "ACQ",
+                "tiers": {
+                    "DEF": "ACQ"
+                }
+            },
+            "PARTISS": {
+                "name": "PARTISS",
+                "value": "988",
+                "tiers": {
+                    "IN": "988"
+                }
+            },
+            "ISS_PARTICIPANT": {
+                "name": "ISS_PARTICIPANT",
+                "value": "988",
+                "tiers": {
+                    "DEF": "988"
+                }
+            },
+            "PARTACQ": {
+                "name": "PARTACQ",
+                "value": "1702",
+                "tiers": {
+                    "IN": "1702"
+                }
+            },
+            "ACQ_PARTICIPANT": {
+                "name": "ACQ_PARTICIPANT",
+                "value": "1702",
+                "tiers": {
+                    "DEF": "1702"
+                }
+            },
+            "ACQUIRER_ID": {
+                "name": "ACQUIRER_ID",
+                "value": "93600898",
+                "tiers": {
+                    "IN": "93600898"
+                }
+            },
+            "ISSUER_ID": {
+                "name": "ISSUER_ID",
+                "value": "93600818",
+                "tiers": {
+                    "IN": "93600818"
+                }
+            },
+            "ISS_NETWORK": {
+                "name": "ISS_NETWORK",
+                "value": "JALIN",
+                "tiers": {
+                    "DEF": "JALIN"
+                }
+            },
+            "TRANS_ID": {
+                "name": "TRANS_ID",
+                "value": "e016256e-37c2-4a9a-8d1c-1769efb09baf",
+                "tiers": {
+                    "DEF": "f129e8c1-94a4-4b1b-8f5b-5dc0028c9734"
+                }
+            },
+            "UUID": {
+                "name": "UUID",
+                "value": "86728643-d1f5-4c6c-8545-a2b58521a4f4",
+                "tiers": {
+                    "DEF": "278fc9bf-9140-4b78-8674-c59ad0ab5bfc"
+                }
+            },
+            "PCI_DATA_KEY": {
+                "name": "PCI_DATA_KEY",
+                "value": "ab8ec444-900b-4a57-9998-8732dd3f4746",
+                "tiers": {
+                    "IN": "d37fe682-acbd-4b91-85d9-13c029c6a699"
+                }
+            },
+            "SOURCE_ID": {
+                "name": "SOURCE_ID",
+                "value": "62cd02d0-b316-46af-9a9e-d2ff5bac42d9",
+                "tiers": {
+                    "DEF": "5d7498e7-5048-4b65-a193-91ab6bbbb0bd"
+                }
+            },
+            "ON_US": {
+                "name": "ON_US",
+                "value": "TRUE",
+                "tiers": {
+                    "DEF": "TRUE"
+                }
+            },
+            "ISS_BANK_ID": {
+                "name": "ISS_BANK_ID",
+                "value": "93600818",
+                "tiers": {
+                    "OR": "93600818"
+                }
+            },
+            "MERCHANT_CITY": {
+                "name": "MERCHANT_CITY",
+                "value": "Jakarta",
+                "tiers": {
+                    "IN": "Jakarta"
+                }
+            },
+            "FORMAT": {
+                "name": "FORMAT",
+                "value": "0",
+                "tiers": {
+                    "DEF": "0"
+                }
+            },
+            "TRANS_STATUS": {
+                "name": "TRANS_STATUS",
+                "value": "1",
+                "tiers": {
+                    "DEF": "1"
+                }
+            },
+            "NETWORK_STATUS": {
+                "name": "NETWORK_STATUS",
+                "value": "2",
+                "tiers": {
+                    "DEF": "2"
+                }
+            },
+            "EXPIRY": {
+                "name": "EXPIRY",
+                "value": "2205",
+                "tiers": {
+                    "IN": "2205"
+                }
+            },
+            "RRN": {
+                "name": "RRN",
+                "value": "cpmfas000005",
+                "tiers": {
+                    "IN": "cpmfas000005"
+                }
+            },
+            "ACQ_NETWORK": {
+                "name": "ACQ_NETWORK",
+                "value": "JALIN",
+                "tiers": {
+                    "DEF": "JALIN"
+                }
+            },
+            "COUNTRY": {
+                "name": "COUNTRY",
+                "value": "360",
+                "tiers": {
+                    "IN": "360"
+                }
+            },
+            "MA": {
+                "name": "MA",
+                "value": "1",
+                "tiers": {
+                    "OT": "1"
+                }
+            },
+            "AMOUNT": {
+                "name": "AMOUNT",
+                "value": "10000000",
+                "tiers": {
+                    "IN": "10000000"
+                }
+            },
+            "MC": {
+                "name": "MC",
+                "value": "2",
+                "tiers": {
+                    "IN": "2"
+                }
+            },
+            "CREATOR": {
+                "name": "CREATOR",
+                "value": "REN_ONLINE",
+                "tiers": {
+                    "DEF": "REN_ONLINE"
+                }
+            },
+            "ACQ_BANK_ID": {
+                "name": "ACQ_BANK_ID",
+                "value": "93600898",
+                "tiers": {
+                    "OR": "93600898"
+                }
+            },
+            "FORWARDING_ID": {
+                "name": "FORWARDING_ID",
+                "value": "008",
+                "tiers": {
+                    "IN": "008",
+                    "IR": "008"
+                }
+            },
+            "PAYLOAD_DATA": {
+                "name": "PAYLOAD_DATA",
+                "value": "208505435056303161554f072006022050075152495343504d5a2093600213038651905f5f200741444f4e4954415f2d046964656e5f50156164686f6e2e72697a6b7940676d61696c2e636f6d9f2502519063079f740438356165",
+                "tiers": {
+                    "IN": "208505435056303161554f072006022050075152495343504d5a2093600213038651905f5f200741444f4e4954415f2d046964656e5f50156164686f6e2e72697a6b7940676d61696c2e636f6d9f2502519063079f740438356165"
+                }
+            },
+            "BIN_TYPE": {
+                "name": "BIN_TYPE",
+                "value": "1",
+                "tiers": {
+                    "IN": "1"
+                }
+            },
+            "NETWORK": {
+                "name": "NETWORK",
+                "value": "JALIN",
+                "tiers": {
+                    "DEF": "JALIN"
+                }
+            },
+            "FEE_AMOUNT": {
+                "name": "FEE_AMOUNT",
+                "value": "1000",
+                "tiers": {
+                    "IN": "1000"
+                }
+            },
+            "MT": {
+                "name": "MT",
+                "value": "3004",
+                "tiers": {
+                    "IN": "3004"
+                }
+            },
+            "MID": {
+                "name": "MID",
+                "value": "MH111111",
+                "tiers": {
+                    "IN": "MH111111"
+                }
+            },
+            "TRANSTIME_RCVD": {
+                "name": "TRANSTIME_RCVD",
+                "value": "20220512043045",
+                "tiers": {
+                    "IN": "20220512043045"
+                }
+            },
+            "MERCHANT_CRITERIA": {
+                "name": "MERCHANT_CRITERIA",
+                "value": "UMI",
+                "tiers": {
+                    "IN": "UMI"
+                }
+            },
+            "PANENTRY": {
+                "name": "PANENTRY",
+                "value": "1",
+                "tiers": {
+                    "IN": "1"
+                }
+            },
+            "MERCHANT_NAME": {
+                "name": "MERCHANT_NAME",
+                "value": "Alfamart",
+                "tiers": {
+                    "IN": "Alfamart"
+                }
+            },
+            "BIN_ISSUEING_COUNTRY": {
+                "name": "BIN_ISSUEING_COUNTRY",
+                "value": "360",
+                "tiers": {
+                    "IN": "360"
+                }
+            },
+            "API_IS_REQ": {
+                "name": "API_IS_REQ",
+                "value": "1",
+                "tiers": {
+                    "IN": "1"
+                }
+            },
+            "FEE_TYPE": {
+                "name": "FEE_TYPE",
+                "value": "C",
+                "tiers": {
+                    "IN": "C"
+                }
+            },
+            "CAPTURE_DATE": {
+                "name": "CAPTURE_DATE",
+                "value": "0512",
+                "tiers": {
+                    "IN": "0512",
+                    "IR": "0512"
+                }
+            },
+            "MERCHANT_COUNTRY_CODE": {
+                "name": "MERCHANT_COUNTRY_CODE",
+                "value": "62",
+                "tiers": {
+                    "IN": "62"
+                }
+            },
+            "MERCHANT_PAN": {
+                "name": "MERCHANT_PAN",
+                "value": "@0002GbWMYnk1sHwT1ggwHLw+Ml6fr3Af7hAiP0FxTggVGKg=",
+                "tiers": {
+                    "IN": "@0002GbWMYnk1sHwT1ggwHLw+Ml6fr3Af7hAiP0FxTggVGKg="
+                }
+            },
+            "PCI_DATA_SOURCE": {
+                "name": "PCI_DATA_SOURCE",
+                "value": "JALIN_CONTAINER-1",
+                "tiers": {
+                    "IN": "JALIN_CONTAINER-1"
+                }
+            },
+            "SOURCE": {
+                "name": "SOURCE",
+                "value": "1",
+                "tiers": {
+                    "DEF": "1"
+                }
+            },
+            "BIN_CARD_ISSUED_REGION": {
+                "name": "BIN_CARD_ISSUED_REGION",
+                "value": "B",
+                "tiers": {
+                    "IN": "B"
+                }
+            },
+            "PROD_INDICATOR": {
+                "name": "PROD_INDICATOR",
+                "value": "Q003",
+                "tiers": {
+                    "IN": "Q003"
+                }
+            },
+            "SRC_HTTP_TYPE": {
+                "name": "SRC_HTTP_TYPE",
+                "value": "3",
+                "tiers": {
+                    "IN": "3"
+                }
+            },
+            "CUSTOMER_DATA": {
+                "name": "CUSTOMER_DATA",
+                "value": "AAAAAAAAAA",
+                "tiers": {
+                    "IN": "AAAAAAAAAA"
+                }
+            },
+            "CURRENCY": {
+                "name": "CURRENCY",
+                "value": "360",
+                "tiers": {
+                    "IN": "360"
+                }
+            },
+            "TRANS_LOCAL_TIME": {
+                "name": "TRANS_LOCAL_TIME",
+                "value": "20220512113045",
+                "tiers": {
+                    "IN": "20220512113045"
+                }
+            },
+            "BACKOFFICE_EXCLUSION_FLAG": {
+                "name": "BACKOFFICE_EXCLUSION_FLAG",
+                "value": "N",
+                "tiers": {
+                    "DEF": "N"
+                }
+            },
+            "DIRECTION": {
+                "name": "DIRECTION",
+                "value": "OUT",
+                "tiers": {
+                    "DEF": "OUT"
+                }
+            },
+            "STAN": {
+                "name": "STAN",
+                "value": "000004",
+                "tiers": {
+                    "IN": "000004"
+                }
+            },
+            "INVOICE_NUMBER": {
+                "name": "INVOICE_NUMBER",
+                "value": "123456789",
+                "tiers": {
+                    "IN": "123456789"
+                }
+            },
+            "MCAT": {
+                "name": "MCAT",
+                "value": "6017",
+                "tiers": {
+                    "IN": "6017"
+                }
+            },
+            "TID": {
+                "name": "TID",
+                "value": "123456",
+                "tiers": {
+                    "IN": "123456"
+                }
+            },
+            "SRC_HTTP_URL": {
+                "name": "SRC_HTTP_URL",
+                "value": "/jalin/V2.1.8.0/qr/debit/payment?username=jalin&password=passjalin",
+                "tiers": {
+                    "IN": "/jalin/V2.1.8.0/qr/debit/payment?username=jalin&password=passjalin"
+                }
+            },
+            "PINENTRY": {
+                "name": "PINENTRY",
+                "value": "1",
+                "tiers": {
+                    "IN": "1"
+                }
+            },
+            "GATEWAY_ID": {
+                "name": "GATEWAY_ID",
+                "value": "9010",
+                "tiers": {
+                    "IN": "9010"
+                }
+            },
+            "PROCCODE": {
+                "name": "PROCCODE",
+                "value": "000000",
+                "tiers": {
+                    "IN": "000000"
+                }
+            },
+            "BIN_CARD_BILLING_CURRENCY": {
+                "name": "BIN_CARD_BILLING_CURRENCY",
+                "value": "360",
+                "tiers": {
+                    "IN": "360"
+                }
+            },
+            "PAN": {
+                "name": "PAN",
+                "value": "@0002GbWMYnk1sHwT1ggwHLw+Ml6fr3Af7hAiP0FxTggVGKg=",
+                "tiers": {
+                    "IN": "@0002GbWMYnk1sHwT1ggwHLw+Ml6fr3Af7hAiP0FxTggVGKg="
+                }
+            },
+            "ENCRYPTED_SKEY": {
+                "name": "ENCRYPTED_SKEY",
+                "value": "@0002GbWMYnk1sHwT1ggwHLw+Ml6fr3Af7hAiP0FxTggVGKg=",
+                "tiers": {
+                    "IN": "@0002GbWMYnk1sHwT1ggwHLw+Ml6fr3Af7hAiP0FxTggVGKg="
+                }
+            }
+        }
+    },
+    "endpointData": {
+        "ACQ_NETWORK_IN": {
+            "name": "EndpointData_JALIN_REQ_IN",
+            "MSG_DIRECTION": "IN",
+            "REQ_RESP": "REQ",
+            "NETWORK_TYPE": "JALIN",
+            "ACQUIRERID": "93600898",
+            "MTI": " 0200",
+            "CAPTUREDATE": " 20220512",
+            "FEETYPE": " C",
+            "PAYLOADDATA": " 208505435056303161554f072006022050075152495343504d5a2093600213038651905f5f200741444f4e4954415f2d046964656e5f50156164686f6e2e72697a6b7940676d61696c2e636f6d9f2502519063079f740438356165",
+            "RRN": " cpmfas000005",
+            "MERCHANTCRITERIA": " UMI",
+            "FORWARDINGID": " 008",
+            "MERCHANTCITY": " Jakarta",
+            "CUSTOMERDATA": " AAAAAAAAAA",
+            "ISSUERID": " 93600818",
+            "TRACK2DATA": " 0",
+            "LOCALTRANSACTIONDATETIME": " 20220512113045",
+            "MERCHANTID": " MH111111",
+            "CUSTOMERPAN": " 93600818",
+            "TRANSACTIONAMOUNT": " 100000.00",
+            "EXPIRATIONDATE": " 2205",
+            "SYSTEMTRACEAUDITNUMBER": " 000004",
+            "MERCHANTTYPE": " 6017",
+            "CURRENCYCODE": " 360",
+            "TERMINALID": " 123456",
+            "INVOICENUMBER": " 123456789",
+            "PRODUCTINDICATOR": " Q003",
+            "POSENTRYMODE": " 011",
+            "SETTLEMENTDATE": " 20220512",
+            "PROCESSINGCODE": " 000000",
+            "MERCHANTNAME": " Alfamart",
+            "MERCHANTCOUNTRY": " 62",
+            "FEEAMOUNT": " 10.00",
+            "TRANSMISSIONDATETIME": " 20220512043045"
+        },
+        "ACQ_NETWORK_OUT": {
+            "name": "EndpointData_JALIN_RESP_OUT",
+            "MSG_DIRECTION": "OUT",
+            "REQ_RESP": "RESP",
+            "NETWORK_TYPE": "JALIN",
+            "RESPONSECODE": "68",
+            "APPROVALCODE": "",
+            "MTI": "0210",
+            "PROCESSINGCODE": ""
+        },
+        "ISS_NETWORK_OUT": {
+            "name": "EndpointData_JALIN_REQ_OUT",
+            "MSG_DIRECTION": "OUT",
+            "REQ_RESP": "REQ",
+            "NETWORK_TYPE": "JALIN",
+            "ACQUIRERID": "93600898",
+            "MTI": "0200",
+            "CAPTUREDATE": "0512",
+            "FEETYPE": "C",
+            "PAYLOADDATA": "208505435056303161554f072006022050075152495343504d5a2093600213038651905f5f200741444f4e4954415f2d046964656e5f50156164686f6e2e72697a6b7940676d61696c2e636f6d9f2502519063079f740438356165",
+            "RRN": "cpmfas000005",
+            "MERCHANTCRITERIA": "UMI",
+            "FORWARDINGID": "008",
+            "MERCHANTCITY": "Jakarta",
+            "CUSTOMERDATA": "AAAAAAAAAA",
+            "ISSUERID": "93600818",
+            "TRACK2DATA": "0",
+            "LOCALTRANSACTIONDATETIME": "20220512113045",
+            "MERCHANTID": "MH111111",
+            "CUSTOMERPAN": "",
+            "TRANSACTIONAMOUNT": "100000.00",
+            "EXPIRATIONDATE": "2205",
+            "SYSTEMTRACEAUDITNUMBER": "000004",
+            "MERCHANTTYPE": "",
+            "CURRENCYCODE": "360",
+            "TERMINALID": "123456",
+            "INVOICENUMBER": "123456789",
+            "PRODUCTINDICATOR": "Q003",
+            "POSENTRYMODE": "011",
+            "SETTLEMENTDATE": "0512",
+            "PROCESSINGCODE": "000000",
+            "MERCHANTNAME": "Alfamart",
+            "MERCHANTCOUNTRY": "62",
+            "FEEAMOUNT": "10.00",
+            "TRANSMISSIONDATETIME": "20220512043045"
+        }
+    }
+}

@@ -1,10 +1,9 @@
-bash /opt/jmeter/bin/jmeter -n -t "/home/vendor/load_test/load_write.jmx" -Jthreads=100 -Jramp=5 -Jduration=300 -l "/home/vendor/load_test/result-1.jtl"
+rm -rf /home/vendor/load_test/result-1.jtl
+bash /opt/jmeter/bin/jmeter -n -t "/home/vendor/load_test/load_write.jmx" -Jthreads=100 -Jramp=5 -Jduration=120 -l "/home/vendor/load_test/result-1.jtl"
 
+#100 data 
+bash hit_api.sh 
 
-bash /opt/jmeter/bin/jmeter -n -t "/home/vendor/load_test/load_write.jmx" -Jthreads=100 -Jramp=0 -Jduration=1 -l "/home/vendor/load_test/result-2.jtl"
-
-
- -Jthreads=100 -Jduration=300 
 
 
 systemctl stop confluent-server
@@ -12,3 +11,16 @@ systemctl stop confluent-server
 
 systemctl start confluent-server
 systemctl restart confluent-kafka-connect
+
+
+
+
+#untuk blokir akses dan allow
+
+iptables -A OUTPUT -p tcp --dport 9092 -m owner --uid-owner vendor -j REJECT
+
+iptables -D OUTPUT -p tcp --dport 9092 -m owner --uid-owner vendor -j REJECT
+
+
+
+curl -X POST http://localhost:8080/api/odc   -H "Content-Type: application/json"   -d @payload.json

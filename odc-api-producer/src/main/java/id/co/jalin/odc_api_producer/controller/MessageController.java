@@ -59,8 +59,8 @@ public class MessageController {
         JsonNode root = objectMapper.readTree(payload);
 
         long systemId = COUNTER.incrementAndGet();
-        String source = root.path("source").asText(null);
-        String sourceId = root.path("source_id").asText(null);
+        String source = root.path("tieredData").path("fields").path("SOURCE").path("value").asText(null);
+        String sourceId = root.path("tieredData").path("fields").path("SOURCE_ID").path("value").asText(null);
         String dataKey = root.path("tieredData").path("fields").path("UUID").path("value").asText(null);
         String refDataKey = root.path("tieredData").path("fields").path("REFERENCE_NUMBER").path("value").asText(null);
         String dataIdentifier = root.path("tieredData").path("fields").path("MC").path("value").asText(null);
